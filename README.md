@@ -1,5 +1,10 @@
 # Laravel SEO
 
+[![Tests](https://github.com/philiprehberger/laravel-seo/actions/workflows/tests.yml/badge.svg)](https://github.com/philiprehberger/laravel-seo/actions/workflows/tests.yml)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/philiprehberger/laravel-seo.svg)](https://packagist.org/packages/philiprehberger/laravel-seo)
+[![PHP Version Require](https://img.shields.io/packagist/php-v/philiprehberger/laravel-seo.svg)](https://packagist.org/packages/philiprehberger/laravel-seo)
+[![License](https://img.shields.io/github/license/philiprehberger/laravel-seo)](LICENSE)
+
 A fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-LD structured data support.
 
 ## Requirements
