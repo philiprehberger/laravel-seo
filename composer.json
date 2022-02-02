@@ -1,6 +1,6 @@
 {
     "name": "philiprehberger/laravel-seo",
-    "description": "Fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-LD structured data support.",
+    "description": "Fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-LD structured data support",
     "type": "library",
     "keywords": ["laravel", "seo", "meta", "opengraph", "twitter-card", "json-ld"],
     "homepage": "https://github.com/philiprehberger/laravel-seo",
