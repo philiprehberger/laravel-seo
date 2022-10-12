@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhilipRehberger\Seo\Tests;
 
+use PhilipRehberger\Seo\OgType;
 use PhilipRehberger\Seo\SeoService;
 
 class SeoServiceTest extends TestCase
@@ -69,6 +70,32 @@ class SeoServiceTest extends TestCase
         $this->seo->setOgType('article');
 
         $this->assertSame('article', $this->seo->getOgType());
+    }
+
+    public function test_set_og_type_with_enum(): void
+    {
+        $this->seo->setOgType(OgType::Article);
+
+        $this->assertSame('article', $this->seo->getOgType());
+    }
+
+    public function test_set_og_type_with_enum_video(): void
+    {
+        $this->seo->setOgType(OgType::Video);
+
+        $this->assertSame('video.other', $this->seo->getOgType());
+    }
+
+    public function test_set_og_image_alt(): void
+    {
+        $this->seo->setOgImageAlt('A beautiful landscape');
+
+        $this->assertSame('A beautiful landscape', $this->seo->getOgImageAlt());
+    }
+
+    public function test_get_og_image_alt_returns_empty_string_by_default(): void
+    {
+        $this->assertSame('', $this->seo->getOgImageAlt());
     }
 
     public function test_noindex_defaults_false(): void
@@ -202,6 +229,7 @@ class SeoServiceTest extends TestCase
             ->setCanonical('https://example.com/page')
             ->setOgImage('https://example.com/image.jpg')
             ->setOgType('article')
+            ->setOgImageAlt('Custom alt text')
             ->setNoindex(true)
             ->addJsonLd(['@type' => 'WebPage']);
 
@@ -212,5 +240,6 @@ class SeoServiceTest extends TestCase
         $this->assertFalse($this->seo->isNoindex());
         $this->assertEmpty($this->seo->getJsonLd());
         $this->assertSame('website', $this->seo->getOgType());
+        $this->assertSame('', $this->seo->getOgImageAlt());
     }
 }

@@ -18,6 +18,7 @@
     $pageCanonical = $canonical ?? $seo->getCanonical();
     $pageOgImage = $ogImage ?? $seo->getOgImage();
     $pageOgType = ($ogType !== null) ? $ogType : $seo->getOgType();
+    $pageOgImageAlt = $seo->getOgImageAlt();
     $siteName = $seo->getSiteName();
     $locale = $seo->getLocale();
     $twitterHandle = $seo->getTwitterHandle();
@@ -55,6 +56,9 @@
 <meta property="og:image" content="{{ $pageOgImage }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+@if($pageOgImageAlt)
+<meta property="og:image:alt" content="{{ $pageOgImageAlt }}">
+@endif
 @endif
 
 {{-- Twitter Card --}}

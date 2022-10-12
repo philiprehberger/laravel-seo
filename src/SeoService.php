@@ -18,6 +18,8 @@ class SeoService
 
     private ?string $ogType = null;
 
+    private ?string $ogImageAlt = null;
+
     private bool $noindex = false;
 
     private array $jsonLd = [];
@@ -65,9 +67,19 @@ class SeoService
     /**
      * Set the Open Graph type.
      */
-    public function setOgType(?string $type): self
+    public function setOgType(OgType|string|null $type): self
     {
-        $this->ogType = $type;
+        $this->ogType = $type instanceof OgType ? $type->value : $type;
+
+        return $this;
+    }
+
+    /**
+     * Set the Open Graph image alt text.
+     */
+    public function setOgImageAlt(?string $alt): self
+    {
+        $this->ogImageAlt = $alt;
 
         return $this;
     }
@@ -129,6 +141,14 @@ class SeoService
         }
 
         return $image ?? '';
+    }
+
+    /**
+     * Get the Open Graph image alt text.
+     */
+    public function getOgImageAlt(): string
+    {
+        return $this->ogImageAlt ?? '';
     }
 
     /**
@@ -307,6 +327,7 @@ class SeoService
         $this->canonical = null;
         $this->ogImage = null;
         $this->ogType = null;
+        $this->ogImageAlt = null;
         $this->noindex = false;
         $this->jsonLd = [];
 

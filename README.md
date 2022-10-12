@@ -17,6 +17,8 @@ Fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-
 composer require philiprehberger/laravel-seo
 ```
 
+The service provider is registered automatically via Laravel package auto-discovery.
+
 ### Publish the config file
 
 ```bash
@@ -69,6 +71,20 @@ Seo::setTitle('My Page')
    ->setOgImage('https://example.com/og.jpg')
    ->setOgType('article')
    ->setNoindex(false);
+```
+
+### Type-Safe Open Graph Types
+
+```php
+use PhilipRehberger\Seo\Facades\Seo;
+use PhilipRehberger\Seo\OgType;
+
+Seo::setOgType(OgType::Article);
+Seo::setOgType(OgType::Product);
+Seo::setOgType(OgType::Video);
+
+// Raw strings are still supported
+Seo::setOgType('article');
 ```
 
 ### Service Injection
@@ -127,7 +143,8 @@ Seo::reset();
 | `Seo::setDescription(string $description)` | Set the meta description |
 | `Seo::setCanonical(string $url)` | Set the canonical URL |
 | `Seo::setOgImage(string $url)` | Set the Open Graph image |
-| `Seo::setOgType(string $type)` | Set the Open Graph type |
+| `Seo::setOgType(OgType\|string $type)` | Set the Open Graph type (enum or string) |
+| `Seo::setOgImageAlt(string $alt)` | Set the Open Graph image alt text |
 | `Seo::setNoindex(bool $noindex)` | Set the noindex flag |
 | `Seo::forPage(string $key)` | Load SEO data from config for a page key |
 | `Seo::addJsonLd(array $schema)` | Add a JSON-LD structured data block |
