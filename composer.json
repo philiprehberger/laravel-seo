@@ -1,0 +1,24 @@
+{
+    "name": "philiprehberger/laravel-seo",
+    "description": "Fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-LD structured data support.",
+    "keywords": ["laravel", "seo", "meta", "opengraph", "twitter-card", "json-ld", "schema"],
+    "license": "MIT",
+    "authors": [{"name": "Philip Rehberger", "email": "me@philiprehberger.com"}],
+    "require": {
+        "php": "^8.2",
+        "illuminate/config": "^11.0|^12.0",
+        "illuminate/support": "^11.0|^12.0",
+        "illuminate/view": "^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/phpunit": "^11.0",
+        "laravel/pint": "^1.0"
+    },
+    "autoload": {"psr-4": {"PhilipRehberger\\Seo\\": "src/"}},
+    "autoload-dev": {"psr-4": {"PhilipRehberger\\Seo\\Tests\\": "tests/"}},
+    "extra": {"laravel": {"providers": ["PhilipRehberger\\Seo\\SeoServiceProvider"]}},
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {"sort-packages": true}
+}
