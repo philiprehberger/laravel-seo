@@ -32,7 +32,7 @@ use PhilipRehberger\Seo\SeoService;
  * @method static array getBreadcrumbSchema(array $items)
  * @method static SeoService reset()
  *
- * @see \PhilipRehberger\Seo\SeoService
+ * @see SeoService
  */
 class Seo extends Facade
 {
