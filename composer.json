@@ -2,10 +2,16 @@
     "name": "philiprehberger/laravel-seo",
     "description": "Fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-LD structured data support.",
     "type": "library",
-    "keywords": ["laravel", "seo", "meta", "opengraph", "twitter-card", "json-ld", "schema"],
+    "keywords": ["laravel", "seo", "meta", "opengraph", "twitter-card", "json-ld"],
     "homepage": "https://github.com/philiprehberger/laravel-seo",
     "license": "MIT",
-    "authors": [{"name": "Philip Rehberger", "email": "me@philiprehberger.com"}],
+    "authors": [
+        {
+            "name": "Philip Rehberger",
+            "email": "me@philiprehberger.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "illuminate/config": "^11.0|^12.0",
@@ -15,7 +21,10 @@
     "require-dev": {
         "orchestra/testbench": "^9.0|^10.0",
         "phpunit/phpunit": "^11.0",
-        "laravel/pint": "^1.0"
+        "laravel/pint": "^1.0",
+        "larastan/larastan": "^2.0|^3.0",
+        "phpstan/phpstan": "^1.12|^2.0",
+        "phpstan/extension-installer": "^1.4"
     },
     "autoload": {"psr-4": {"PhilipRehberger\\Seo\\": "src/"}},
     "autoload-dev": {"psr-4": {"PhilipRehberger\\Seo\\Tests\\": "tests/"}},
@@ -27,5 +36,10 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "config": {"sort-packages": true}
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    }
 }

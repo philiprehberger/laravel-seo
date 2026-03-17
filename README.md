@@ -2,7 +2,6 @@
 
 [![Tests](https://github.com/philiprehberger/laravel-seo/actions/workflows/tests.yml/badge.svg)](https://github.com/philiprehberger/laravel-seo/actions/workflows/tests.yml)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/philiprehberger/laravel-seo.svg)](https://packagist.org/packages/philiprehberger/laravel-seo)
-[![PHP Version Require](https://img.shields.io/packagist/php-v/philiprehberger/laravel-seo.svg)](https://packagist.org/packages/philiprehberger/laravel-seo)
 [![License](https://img.shields.io/github/license/philiprehberger/laravel-seo)](LICENSE)
 
 A fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-LD structured data support.
@@ -30,46 +29,6 @@ This creates `config/laravel-seo.php` in your application.
 
 ```bash
 php artisan vendor:publish --tag=laravel-seo-views
-```
-
-## Configuration
-
-`config/laravel-seo.php`:
-
-```php
-return [
-    'default_title'       => env('APP_NAME', 'Laravel'),
-    'default_description' => '',
-    'site_name'           => env('APP_NAME', 'Laravel'),
-    'locale'              => 'en_US',
-    'og_image'            => null,
-    'og_type'             => 'website',
-    'twitter_handle'      => '@yourbrand',
-
-    'organization' => [
-        'name'         => 'Acme Corp',
-        'url'          => 'https://acme.com',
-        'logo'         => '/images/logo.png',
-        'email'        => 'hello@acme.com',
-        'description'  => 'We build great things.',
-        'founding_date'=> '2020',
-        'same_as'      => [
-            'https://twitter.com/acme',
-            'https://linkedin.com/company/acme',
-        ],
-    ],
-
-    'pages' => [
-        'home' => [
-            'title'       => 'Welcome to Acme',
-            'description' => 'The best products on the web.',
-        ],
-        'about' => [
-            'title'       => 'About Us',
-            'description' => 'Learn more about our team.',
-        ],
-    ],
-];
 ```
 
 ## Usage
@@ -104,7 +63,6 @@ The component reads all values from the `SeoService` singleton, but also accepts
 ```php
 use PhilipRehberger\Seo\Facades\Seo;
 
-// In a controller or service provider
 Seo::setTitle('My Page')
    ->setDescription('Welcome to my page.')
    ->setCanonical('https://example.com/page')
@@ -132,127 +90,62 @@ class PageController extends Controller
 
 ### Page-Specific SEO from Config
 
-Load predefined SEO data for a page by its config key:
-
 ```php
 Seo::forPage('home');
-// or
-app(SeoService::class)->forPage('about');
 ```
 
 ### JSON-LD Structured Data
-
-#### Add a custom schema
 
 ```php
 Seo::addJsonLd([
     '@context' => 'https://schema.org',
     '@type'    => 'Article',
     'headline' => 'My Blog Post',
-    'author'   => ['@type' => 'Person', 'name' => 'Jane Doe'],
 ]);
-```
 
-#### Built-in schema generators
-
-**Organization schema** (also rendered automatically when no other JSON-LD is set):
-
-```php
-$schema = Seo::getOrganizationSchema();
-Seo::addJsonLd($schema);
-```
-
-**WebSite schema**:
-
-```php
+// Built-in schema generators
+Seo::addJsonLd(Seo::getOrganizationSchema());
 Seo::addJsonLd(Seo::getWebsiteSchema());
-```
-
-**Service schema**:
-
-```php
-Seo::addJsonLd(
-    Seo::getServiceSchema('Web Design', 'We design beautiful websites.', 'Design')
-);
-```
-
-**BreadcrumbList schema**:
-
-```php
+Seo::addJsonLd(Seo::getServiceSchema('Web Design', 'We design beautiful websites.', 'Design'));
 Seo::addJsonLd(Seo::getBreadcrumbSchema([
-    ['name' => 'Home',    'url' => 'https://example.com/'],
-    ['name' => 'Blog',    'url' => 'https://example.com/blog'],
-    ['name' => 'My Post', 'url' => 'https://example.com/blog/my-post'],
+    ['name' => 'Home', 'url' => 'https://example.com/'],
+    ['name' => 'Blog', 'url' => 'https://example.com/blog'],
 ]));
 ```
 
 ### Resetting Between Requests
 
-The service is registered as a singleton. If you need to reset its state (e.g. in tests or when reusing across requests):
-
 ```php
 Seo::reset();
 ```
 
-### CSP Nonce Support
+## API
 
-If your application uses a Content Security Policy with script nonces, pass `$cspNonce` to your view and the package will automatically apply it to all JSON-LD `<script>` tags:
+| Method | Description |
+|--------|-------------|
+| `Seo::setTitle(string $title)` | Set the page title |
+| `Seo::setDescription(string $description)` | Set the meta description |
+| `Seo::setCanonical(string $url)` | Set the canonical URL |
+| `Seo::setOgImage(string $url)` | Set the Open Graph image |
+| `Seo::setOgType(string $type)` | Set the Open Graph type |
+| `Seo::setNoindex(bool $noindex)` | Set the noindex flag |
+| `Seo::forPage(string $key)` | Load SEO data from config for a page key |
+| `Seo::addJsonLd(array $schema)` | Add a JSON-LD structured data block |
+| `Seo::getOrganizationSchema()` | Generate an Organization schema array |
+| `Seo::getWebsiteSchema()` | Generate a WebSite schema array |
+| `Seo::getServiceSchema(string $name, string $description, string $type)` | Generate a Service schema array |
+| `Seo::getBreadcrumbSchema(array $items)` | Generate a BreadcrumbList schema array |
+| `Seo::reset()` | Reset the service state |
 
-```blade
-{{-- In your layout --}}
-<x-seo::meta />
-```
-
-The component checks for `$cspNonce` in the view scope. If it is set, it renders `<script nonce="{{ $cspNonce }}" ...>`. If it is not set, the nonce attribute is omitted entirely, so the package works out of the box without any security-headers package.
-
-## Rendered Output
-
-The Blade component produces:
-
-```html
-<title>My Page</title>
-<meta name="description" content="Welcome to my page.">
-<meta name="robots" content="index, follow">
-
-<link rel="canonical" href="https://example.com/page">
-
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://example.com/page">
-<meta property="og:title" content="My Page">
-<meta property="og:description" content="Welcome to my page.">
-<meta property="og:site_name" content="My App">
-<meta property="og:locale" content="en_US">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@yourbrand">
-<meta name="twitter:creator" content="@yourbrand">
-<meta name="twitter:title" content="My Page">
-<meta name="twitter:description" content="Welcome to my page.">
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "My App",
-    "url": "https://example.com"
-}
-</script>
-```
-
-## Testing
+## Development
 
 ```bash
-composer test
-```
-
-## Code Style
-
-```bash
-./vendor/bin/pint
+composer install
+vendor/bin/phpunit
+vendor/bin/pint --test
+vendor/bin/phpstan analyse
 ```
 
 ## License
 
-The MIT License (MIT). See [LICENSE](LICENSE) for details.
-
-
+MIT
