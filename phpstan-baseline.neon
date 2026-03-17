@@ -1,0 +1,91 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Class PhilipRehberger\\Seo\\Facades\\Seo has PHPDoc tag @method for method addJsonLd\(\) parameter \#1 \$schema with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Facades/Seo.php
+
+		-
+			message: '#^Class PhilipRehberger\\Seo\\Facades\\Seo has PHPDoc tag @method for method getBreadcrumbSchema\(\) parameter \#1 \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Facades/Seo.php
+
+		-
+			message: '#^Class PhilipRehberger\\Seo\\Facades\\Seo has PHPDoc tag @method for method getBreadcrumbSchema\(\) return type with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Facades/Seo.php
+
+		-
+			message: '#^Class PhilipRehberger\\Seo\\Facades\\Seo has PHPDoc tag @method for method getJsonLd\(\) return type with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Facades/Seo.php
+
+		-
+			message: '#^Class PhilipRehberger\\Seo\\Facades\\Seo has PHPDoc tag @method for method getOrganizationSchema\(\) return type with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Facades/Seo.php
+
+		-
+			message: '#^Class PhilipRehberger\\Seo\\Facades\\Seo has PHPDoc tag @method for method getServiceSchema\(\) return type with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Facades/Seo.php
+
+		-
+			message: '#^Class PhilipRehberger\\Seo\\Facades\\Seo has PHPDoc tag @method for method getWebsiteSchema\(\) return type with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Facades/Seo.php
+
+		-
+			message: '#^Method PhilipRehberger\\Seo\\SeoService\:\:addJsonLd\(\) has parameter \$schema with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/SeoService.php
+
+		-
+			message: '#^Method PhilipRehberger\\Seo\\SeoService\:\:getBreadcrumbSchema\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/SeoService.php
+
+		-
+			message: '#^Method PhilipRehberger\\Seo\\SeoService\:\:getBreadcrumbSchema\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/SeoService.php
+
+		-
+			message: '#^Method PhilipRehberger\\Seo\\SeoService\:\:getJsonLd\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/SeoService.php
+
+		-
+			message: '#^Method PhilipRehberger\\Seo\\SeoService\:\:getOrganizationSchema\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/SeoService.php
+
+		-
+			message: '#^Method PhilipRehberger\\Seo\\SeoService\:\:getServiceSchema\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/SeoService.php
+
+		-
+			message: '#^Method PhilipRehberger\\Seo\\SeoService\:\:getWebsiteSchema\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/SeoService.php
+
+		-
+			message: '#^Property PhilipRehberger\\Seo\\SeoService\:\:\$jsonLd type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/SeoService.php
