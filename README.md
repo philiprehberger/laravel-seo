@@ -4,7 +4,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/philiprehberger/laravel-seo.svg)](https://packagist.org/packages/philiprehberger/laravel-seo)
 [![License](https://img.shields.io/github/license/philiprehberger/laravel-seo)](LICENSE)
 
-A fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-LD structured data support.
+Fluent SEO metadata service for Laravel with Open Graph, Twitter Card, and JSON-LD structured data support.
 
 ## Requirements
 
