@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhilipRehberger\Seo\Tests;
 
 use Illuminate\Support\Facades\Blade;
+use PhilipRehberger\Seo\OgType;
 use PhilipRehberger\Seo\SeoService;
 
 class SeoBladeComponentTest extends TestCase
@@ -116,6 +117,35 @@ class SeoBladeComponentTest extends TestCase
         $this->assertStringContainsString('application/ld+json', $output);
         $this->assertStringContainsString('"@type": "WebPage"', $output);
         $this->assertStringContainsString('"name": "Test Page"', $output);
+    }
+
+    public function test_component_renders_og_type_from_enum(): void
+    {
+        app(SeoService::class)->setOgType(OgType::Product);
+
+        $output = $this->renderMeta();
+
+        $this->assertStringContainsString('<meta property="og:type" content="product">', $output);
+    }
+
+    public function test_component_renders_og_image_alt(): void
+    {
+        app(SeoService::class)
+            ->setOgImage('https://example.com/og.jpg')
+            ->setOgImageAlt('A descriptive alt text');
+
+        $output = $this->renderMeta();
+
+        $this->assertStringContainsString('<meta property="og:image:alt" content="A descriptive alt text">', $output);
+    }
+
+    public function test_component_does_not_render_og_image_alt_when_empty(): void
+    {
+        app(SeoService::class)->setOgImage('https://example.com/og.jpg');
+
+        $output = $this->renderMeta();
+
+        $this->assertStringNotContainsString('og:image:alt', $output);
     }
 
     public function test_component_renders_noindex_when_set(): void
